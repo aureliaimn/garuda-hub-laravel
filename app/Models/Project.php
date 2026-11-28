@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 #[Fillable(['client_id', 'title', 'description', 'category', 'budget_min', 'budget_max', 'deadline', 'status'])]
 class Project extends Model
 {
+    use HasFactory;
+
     protected function casts(): array
     {
         return ['deadline' => 'date'];
