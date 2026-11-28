@@ -13,10 +13,17 @@ return new class extends Migration
     {
         Schema::create('bids', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('developer_id')->constrained('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('price');
+            $table->unsignedInteger('duration_days');
+            $table->text('proposal');
+            $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->timestamps();
+
+            $table->unique(['project_id', 'developer_id']);
         });
     }
-
     /**
      * Reverse the migrations.
      */
